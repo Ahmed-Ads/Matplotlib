@@ -1,0 +1,296 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{ragged2e} 
+\usepackage{fancyhdr} 
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage[left=4cm, right=4cm, top=3cm, bottom=3cm]{geometry}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{datetime}
+
+
+% Set up code listing style
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!5},
+    tabsize=4,
+    literate={*}{{\char42}}1
+         {-}{{\char45}}1
+}
+
+% Set up fancy header
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[C]{Ahmed Mohamed Ads\\} 
+\fancyhead[L]{Faculty of Engineering}
+\fancyhead[R]{Mansoura University} 
+
+\title{Matplotlib Summary \\ {\href{https://youtube.com/playlist?list=PL-osiE80TeTvipOqomVEeZ1HRrcEvtZB_&si=WnoQxR4n0ANEHHwY}{Matplotlib Tutorials playlist}}}
+\author{Ahmed Mohamed Ads} 
+\date{\formatdate{15}{4}{2025} \\ 
+17 Shawwal 1446 AH 
+}
+
+\parindent0pt
+\begin{document}
+\maketitle
+
+% Title Section
+\section*{\huge Matplotlib}
+
+\subsection*{matplotlib}
+Python library used for plotting different graphs.
+
+\subsubsection*{Basic Imports and Functions}
+\begin{lstlisting}[language=Python]
+import matplotlib
+\%matplotlib tk
+from matplotlib import pyplot as plt
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|import matplotlib|: importing the library to use it.
+\item \lstinline|\%matplotlib tk|: if you want the figure in a separate window, not in the notebook line (this is extra information from me :) )  
+\item \lstinline|from matplotlib import pyplot as plt|: importing the pyplot module from the library to use it to plot this module has several functions for plotting.
+\end{itemize}
+
+\subsubsection*{Plotting Functions}
+\begin{lstlisting}[language=Python]
+plt.plot(x, y)
+plt.xlabel('name on x_axis')
+plt.ylabel('name on y_axis')
+plt.title('title of the plot')
+plt.legend()
+plt.show()
+plt.grid()
+plt.tight_layout()
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.plot(x, y)|: the plotting function plot and the two arguments, the x on the x-axis and the y on the y-axis.
+\item \lstinline|plt.xlabel('name on x_axis')|: function for the label representing the data on the x\_axis.
+\item \lstinline|plt.ylabel('name on y_axis')|: function for the label representing the data on the y\_axis.
+\item \lstinline|plt.title('title of the plot')|: function for the title that represents what the plot is for.
+\item \lstinline|plt.legend()|: function adds a legend and the legend is a small box explaining the meaning of the different elements plotted lines, bars, etc. \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html}{matplotlib legend documentation}
+\item \lstinline|plt.show()|: function responsible for presenting the plot on the screen (displaying on).
+\item \lstinline|plt.grid()|: function taking True or False, responsible for making a grid for the plot for better vision.
+\item \lstinline|plt.tight_layout()|: function for adjusting spacing or overlapping between subplots.
+\end{itemize}
+
+\subsubsection*{Style and Saving}
+\begin{lstlisting}[language=Python]
+plt.style.available
+plt.style.use()
+plt.savefig('plot.png')
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.style.available|: an attribute used to see the available style for changing plot style.
+\item \lstinline|plt.style.use()|: function used for changing plot style.
+\item \lstinline|plt.savefig('plot.png')|: function used for saving the plot as png.
+\end{itemize}
+
+\subsection*{some functions extra explanation}
+\begin{lstlisting}[language=Python]
+plt.plot(x_data, y_data, '^ k - -' , label = 'All Devs')
+plt.plot(x_data, y_data, color = 'k', linestyle = '- -', marker = '.')
+plt.plot(x_data, y_data, color = '#5a7d9a', linewidth = '3')
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.plot(x_data, y_data, '^ k--', label = 'All Devs'|: this is a formatting for the marker, line, and color (fmt = '[marker][line][color]'). (label = 'All Devs') label for the legend (better for avoiding the problem of order).
+\item \lstinline|plt.plot(x_data, y_data, color = 'k', linestyle = '- -', marker = '.'|: we can use the previous fmt as this (color ='color', linestyle= 'linestyle', marker = 'marker').
+\item \lstinline|plt.plot(x_data, y_data, color = '#5a7d9a', linewidth = '3'|: we can also use the hexa representation for the color. (linewidth = 'width') is used for making the line of the plot Bold according to a specific width.
+\end{itemize}
+
+\subsubsection*{Bar Charts}
+\begin{lstlisting}[language=Python]
+plt.bar(x_data, y_data)
+plt.barh()  # Horizontal bars
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.bar(x_data, y_data)|: function for plotting a bar chart
+\item \lstinline|plt.barh()|: plotting the bars horizontally
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{"C:/LaTex/Matplotlib/Figures\_Used/mat1.PNG"}
+\caption{code for more than bar chart}
+\end{figure}
+
+\subsubsection*{Multiple Bar Charts Solution}
+\begin{lstlisting}[language=Python]
+import numpy as np
+x_indexes = np.arange(len(age_x))
+width = 0.25
+plt.bar(x_indexes - width, py_dev_y, width=width)
+plt.bar(x_indexes, js_dev_y, width=width)
+plt.bar(x_indexes + width, dev_y, width=width)
+plt.xticks(ticks=x_indexes, labels=age_x)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|import numpy as np|: importing the numpy library
+\item \lstinline|x_indexes = np.arange(len(age_x))|: making the range of indexes and to the bars side by side we will subtract the width from one of the bars and leave one as the middle one and the third we will add the width to it to make the bars side by side like this and if more than three we can add double the width, etc...
+\item \lstinline|plt.xticks(ticks=x_indexes, labels=age_x)|: Now in the plot, we see that the x-axis doesn't have the ages, and it has the indexes. We can fix that by using (plt.xticks(ticks = x\_indexes, labels = age\_x)), and parameters may vary according to variables
+\end{itemize}
+
+\subsubsection*{} \texttt{} \\  \texttt{} \\  \texttt{}  \\  \texttt{} \\ \texttt{} \\  \texttt{} \\  \texttt{}  \\  \texttt{} \\ \texttt{} \\  \texttt{} \\  \texttt{}  \\  \texttt{} \\ \texttt{} \\  \texttt{} \\  \texttt{}  \\  \texttt{} \\ \texttt{} \\  \texttt{} \\  \texttt{}  \\  
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{"C:/LaTex/Matplotlib/Figures\_Used/bars1.PNG"}
+\caption{more than bar chart}
+\end{figure}
+
+
+\subsection*{Pandas Integration}
+\begin{lstlisting}[language=Python]
+import pandas as pd
+df = pd.read_csv()
+df[].str.split(';').explode().value_counts()
+.reverse() or [::-1]  # To reverse data order
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|import pandas as pd|: importing pandas library as name pd
+\item \lstinline|df = pd.read_csv()|: reading a csv file using pandas
+\item \lstinline|df[].str.split(';').explode().value_counts()|: splitting a data separated with (;) and counting it for Series objects, not the entire DataFrame.
+\item \lstinline|.reverse() or [::-1]|: We can use these two to reverse the data (.reverse() works on lists only; [::-1] works on lists, strings, arrays) to make the most is up or down.
+\end{itemize}
+
+\subsection*{Pie Charts}
+\begin{lstlisting}[language=Python]
+plt.pie(slices, labels=labels)
+plt.pie(slices, wedgeprops={})
+plt.pie(slices, explode=[0,0,0,wanted,0], shadow=True, 
+       startangle=angle, autopct='%1.1f%%')
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.pie(slices, labels=labels)|: function for plotting a pie chart. (We can pass labels = labels for the labels of the pie chart).
+\item \lstinline|plt.pie(slices, wedgeprops={})|: we can use the \texttt{wedgeprops} to control the appearance of some wedges in the pie chart. You can see the documentation here for more details \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Wedge.html}{matplotlib wedge documentation}
+\item \lstinline|plt.pie(slices, explode=[0,0,0,wanted,0], shadow=True, startangle=angle, autopct='\%1.1f\%\%'|: \texttt{label} is for pies labels. \texttt{wedgeprops} we talked about it. \texttt{explode} is used to explode a certain pie. We choose a number (wanted), and we then apply the explode. \texttt{shadow} for making a shadow for the pie chart. \texttt{startangle} for starting the chart with a certain angle. \texttt{autopct= '\%1.1f\%\%'} for adding the percent of each piece of pie on it.
+\end{itemize}
+
+\subsection*{Advanced Plotting}
+\begin{lstlisting}[language=Python]
+plt.stackplot()
+plt.fill_between(x_values, y_values, limit)
+plt.fill_between(x_values, y_values, limit, 
+                where=(y_values > limit), 
+                interpolate=True, alpha=0.25)
+plt.hist(ages, bins=bins, edgecolor='black', log=True)
+plt.axvline()  # Vertical line
+plt.scatter(x,y, s=100, c='color', cmap='Greens', 
+           marker='x', edgecolor='black', 
+           linewidth=1, alpha=0.75)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.stackplot()|: function for plotting stack plot.
+\item \lstinline|plt.fill_between(x_values, y_values, limit)|: function for filling under the line plot \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.fill_between.html}{matplotlib fill\_between documentation}.
+\item \lstinline|plt.fill_between(x_values, y_values, limit, where=(y_values > limit), interpolate=True, alpha=0.25)|: \texttt{where} is used to customize the filling limit above or below a certain value. \texttt{alpha = value} and this is how much we can see through the filling. \texttt{interpolate} to make sure that the intersections do not get clipped and the regions are filled correctly.  
+\item \lstinline|plt.hist(ages, bins=bins, edgecolor='black', log=True)|: plotting a histogram. \texttt{bins} divides the plot into a certain number of bins according to one or several values. \texttt{edgecolor} the edge color of the histogram. \texttt{log} is used for making the plot in logarithmic scale.
+\item \lstinline|plt.axvline()|: used for drawing a vertical line on the plot for a specific value.
+\item \lstinline|plt.scatter(x,y, s=100, c='color', cmap='Greens', marker='x', edgecolor='black', linewidth=1, alpha=0.75)|: \texttt{s= value} the size of the marker on the plot. \texttt{c = 'colors'} choosing plots colors. \texttt{cmap = 'color map'} choosing a certain color map for the plot and visit \href{https://matplotlib.org/stable/users/explain/colors/colormaps.html}{matplotlib color map documentation} for more information. \texttt{marker = 'marker shape'} choosing a specific color style and see \href{https://matplotlib.org/stable/api/markers_api.html}{matplotlib marker documentation} for more information. \texttt{edgecolor} as we said before, for the color of the edges. \texttt{linewidth = value} for the width of the markers in the plot. \texttt{alpha = value} as we said before, this is how much we can see through the filling.
+\end{itemize}
+
+\subsection*{Scaling Functions}
+\begin{lstlisting}[language=Python]
+plt.xscale()
+plt.yscale()
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|plt.xscale()|: making a specific scale for example log scale and see \href{https://matplotlib.org/stable/api/scale_api.html#builtin-scales}{matplotlib scale documentation} for more information.
+\item \lstinline|plt.yscale()|: making a specific scale for example log scale and see \href{https://matplotlib.org/stable/api/scale_api.html#builtin-scales}{matplotlib scale documentation} for more information.
+\end{itemize}
+
+\subsection*{Time Series}
+\begin{lstlisting}[language=Python]
+from datetime import datetime, timedelta
+from matplotlib import dates as mpl_dates
+plt.plot_date(x_values, y_values, 
+             linestyle='style', marker='marker_shape')
+plt.gcf().autofmt_xdate()
+date_format = mpl_dates.DateFormatter('%b, %d, %Y')
+plt.gca().xaxis.set_major_formatter(date_format)
+data['Date'] = pd.to_datetime(data['Date'])
+data.sort_values('Date', inplace=True)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|from datetime import datetime, timedelta|: importing the datetime and timedelta module from the datetime library to use it to.
+\item \lstinline|from matplotlib import dates as mpl_dates|: importing the dates module with name mpl\_dates from the matplotlib library to use it.
+\item \lstinline|plt.plot_date(x_values, y_values, linestyle='style', marker='marker_shape')|: \texttt{plt.plot\_date()} is used for plotting time series data. \texttt{linestyle = 'style'} is used for choosing a specific style for the plot, for example, solid, making the data matched by a solid line. \texttt{marker = ''} used for choosing a marker shape.
+\item \lstinline|plt.gcf().autofmt_xdate()|: \texttt{plt.gcf()} for getting the current figure. \texttt{plt.autofmt\_xdate} for auto-formatting the appearance of the data on the x-axis.
+\item \lstinline|date_format = mpl_dates.DateFormatter('%b, %d, %Y')|: setting a specific format for the date and visit \href{https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior}{matplotlib string format documentation} for more.
+\item \lstinline|plt.gca().xaxis.set_major_formatter(date_format)|: getting the current axis and setting a specific format using the variable we assigned the format to.
+\item \lstinline|data['Date'] = pd.to_datetime(data['Date'])|: converting string to datetime as values.
+\item \lstinline|data.sort_values('Date', inplace=True)|: sorting values by Date ascending and \texttt{inplace = True} for doing it permanently without the need to assign it again to the same variable.
+\end{itemize}
+
+\subsection*{Animations}
+\begin{lstlisting}[language=Python]
+from itertools import count
+from matplotlib.animation import FuncAnimation
+
+x_vals = []
+y_vals = []
+index = count()
+
+def animate(i):
+    x_vals.append(next(index))
+    y_vals.append(random.randint(0, 5))
+    plt.cla()
+    plt.plot(x_vals, y_vals)
+
+ani = FuncAnimation(plt.gcf(), animate, interval=1000)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|from itertools import count|: importing the count module from the itertools library, which counts one number at a time when we get the next value of something.
+\item \lstinline|x_vals = []; y_vals = []; index = count()|: assigning two empty lists and then assigning the index variable that we mentioned before \texttt{def animate(i) :} is a function for adding values to the list of x and y and plotting.
+\item \lstinline|plt.cla()|: used for clearing the axis to prevent the variation of changing the color of the line with each update.
+\item \lstinline|FuncAnimation(plt.gcf(), animate, interval=1000)|: function for live plot takes the current figure, and the function and more parameters see \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html}{matplotlib FuncAnimation documentation} for more, and \texttt{interval} is for choosing the interval of changing that takes values in milliseconds.
+\end{itemize}
+
+\subsection*{Subplots}
+\begin{lstlisting}[language=Python]
+fig, (ax1,..) = plt.subplots(nrows=value, ncols=value)
+fig, ax = plt.subplots()
+ax.set_title()
+ax.set_xlabel()
+ax.set_ylabel()
+fig1, ax1 = plt.subplots()
+fig2, ax2 = plt.subplots()
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|fig, (ax1,..) = plt.subplots(nrows=value, ncols=value)|: making a multiple subplot in the same figure. See and see \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html}{matplotlib subplots documentation} for more \texttt{(ax1,..)} is for unpacking them in multiple variables instead of one variable if needed.
+\item \lstinline|ax.set_title(); ax.set_xlabel(); ax.set_ylabel()|: Note that the subplots take set\_(label or title).
+\item \lstinline|fig1, ax1 = plt.subplots(); fig2, ax2 = plt.subplots()|: for making the subplots in different figures.
+\end{itemize}
+
+\subsection*{Conclusion}
+At the end, this was a fast summary for the \href{https://matplotlib.org/stable/api/markers_api.html}{matplotlib tutorial playlist} by me, and if it is useful, don't forget to pray for me \texttt{and for all our brothers in Palestine and Sudan}. And thank you :).
+
+\center{\textcopyright 2025 Ahmed\_Ads \\}
+
+\noindent\hrulefill % Adds a horizontal line
+\vspace{1em} % Adds vertical space
+
+\end{document}
